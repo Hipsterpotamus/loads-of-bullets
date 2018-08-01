@@ -645,7 +645,7 @@ function hitsAnyEnemy(OBJECTX, OBJECTY, OBJECTR, Skip) {
 }
 
 function inScreen(x, y, r) {
-    if ((x + r) * P > 1920 || (x - r) * P < 0 || (y + r) * P > 1100 * P || (y - r) * P < 0) {
+    if ((x + r) * P > width || (x - r) * P < 0 || (y + r) * P > height * P || (y - r) * P < 0) {
         return false;
     }
     return true;
