@@ -280,9 +280,9 @@ class Enemy {
                     push();
 
                     noStroke();
-                    translate(this.pos.x, this.pos.y);
+                    translate(this.pos.x*P, this.pos.y*P);
                     rotate(45);
-                    translate(-this.pos.x, -this.pos.y);
+                    translate(-this.pos.x*P, -this.pos.y*P);
                     fillSet(this.color);
                     ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
 
