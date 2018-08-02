@@ -1,5 +1,5 @@
 class StatItem {
-    constructor(pickedUp, reload, damage, health, speed, bulletSpeed, range, size, ammo, name, desc, image) {
+    constructor(pickedUp, reload, damage, health, speed, bulletSpeed, range, size, ammo, name, desc, image, itemNumber) {
         this.pickedUp = pickedUp; //Whether the item's effect has been applied or not.
         this.reload = reload; //Buffs and Nerfs assigned to reload
         this.damage = damage; //How much damage a bullet does on impact
@@ -12,6 +12,7 @@ class StatItem {
         this.name = name;
         this.desc = desc;
         this.img = image;
+        this.itemNumber = itemNumber;
     }
 }
 
@@ -47,10 +48,14 @@ function gainItem(roomSeed) {
 
 //-rl-dmg-hp-sp-blsp-rng-sz-ammo-------------------------------------------------
 let STATITEMS = [
-    slickOil = new StatItem(false, 1.25, 1, 1, 1, 1, 1, 1, 1, "Slick Oil", "Bullets slide in like butter"),
-    fruitsnveggies = new StatItem(false, 1, 1.1, 1.15, 1, 1, 1, 1, 1,"fruits 'n veggies", "Help you grow"),
-    rollerBlades = new StatItem(false, 1, 1, 1, 1.2, 1, 1, 1, 1, "Roller Blades", "Skating > Walking"),
-    barrelBloater = new StatItem(false, 1, 1, 1, 1, 1, 1, 1.5, 1,"Barrel Bloater", "Bigger bullets"),
-    monocle = new StatItem(false, 1, 1, 1, 1, 1, 1.15, 1, 1,"Monocle", "Helps you shoot")
+    slickOil = new StatItem(false, 1.25, 1, 1, 1, 1, 1, 1, 1, "Slick Oil", "Bullets slide in like butter",1),
+    fruitsnveggies = new StatItem(false, 1, 1.1, 1.15, 1, 1, 1, 1, 1,"fruits 'n veggies", "Help you grow",2),
+    rollerBlades = new StatItem(false, 1, 1, 1, 1.2, 1, 1, 1, 1, "Roller Blades", "Skating > Walking",3),
+    barrelBloater = new StatItem(false, 1, 1, 1, 1, 1, 1, 1.5, 1,"Barrel Bloater", "Bigger bullets",4),
+    monocle = new StatItem(false, 1, 1, 1, 1, 1, 1.15, 1, 1,"Monocle", "Helps you shoot",5),
+    proteinMix = new StatItem(false, 1, 1, 1.25, 1, 1, 1, 1, 1,"Protein Mix", "Add some protein",6),
+    olympicMedal = new StatItem(false, 1, 1, 1, 1.2, 1.5, 1, 1, 1,"Olympic Medal", "Herculian speeds",7),
+    goldBullets = new StatItem(false, 0.8, 1.5, 1, 1, 0.66, 1, 1, 1,"Gold Bullets", "Touched by the King",8),
+    rocketPropellers = new StatItem(false, 1, 1.05, 1, 1, 1.5, 1.25, 1, 1,"Rocket Propellers", "Requires a rocket scientist",9)
 ];
 
