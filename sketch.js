@@ -307,7 +307,7 @@ $(window).keydown(function (event) {
             menuGun = "Bazooka";
             break;
         case 13:
-            startGame();
+            if(menu == "Home"){startGame();}
             break;
     }
 });
