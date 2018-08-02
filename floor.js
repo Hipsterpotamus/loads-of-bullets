@@ -60,7 +60,7 @@ class Floor {
             while(true){    // Same as above but for items
                 TRE = createVector(Math.floor(random(0,this.floorL)),Math.floor(random(0,this.floorH)))
                 if(this.rooms[TRE.x][TRE.y].type=="n"){
-                        this.keys.push(TRE);
+                        
                         this.rooms[TRE.x][TRE.y].type = "item";
                         break;
                 }

@@ -68,10 +68,10 @@ function gainItem(roomSeed) {
 
 
 
-        player.Stats.newestItem = player.Stats.Items[RS];
-        player.Stats.itemReceiveTime = interval;
+        
     }
-    
+    player.Stats.newestItem = player.Stats.Items[RS];
+    player.Stats.itemReceiveTime = interval;
 }
 
 //-rl-dmg-hp-sp-blsp-rng-sz-ammo-------------------------------------------------
@@ -89,20 +89,22 @@ let STATITEMS = [
 
 let PASSIVEITEMS = [
     bottledRage = new PassiveItem(false, 1, 0, 0, "Bottled Rage", "My pain is your pain", 0, 1),
-    lotsOfBullets = new PassiveItem(false, 0, 0, 0, "Lots of Bullets", "More Bullets, More Damage", 0, 2),
+    lotsOfBullets = new PassiveItem(false, 1, 0, 0, "Lots of Bullets", "More Bullets, More Damage", 0, 2),
     emergencyAmmo = new PassiveItem(false, 2, 0, 0, "Emergency Ammo", "Reloads two empty guns", 0, 3)
 ];
 
 function passiveCheck() {
     if (player.passives[0].pickedUp) { //Bottled Rage
-        player.Stats.damage = Math.floor(player.Stats.damage / player.passives[0].SNA * 100) / 100;
-        player.passives[0].SNA = Math.floor((player.MAXHP - player.HP) * 100) / 1000;
-        player.Stats.damage = Math.floor(player.Stats.damage * player.passives[0].SNA * 100) / 100;
+        player.Stats.damage = Math.floor(player.Stats.damage / player.passives[0].SNA * 1000) / 1000;
+        player.passives[0].SNA = Math.floor((player.MAXHP/player.HP) * 100) / 150;
+        if(player.passives[0].SNA<1){player.passives[0].SNA=1;}else if(player.passives[0].SNA>4){player.passives[0].SNA=4;}
+        player.Stats.damage = Math.floor(player.Stats.damage * player.passives[0].SNA * 1000) / 1000;
     }
     if (player.passives[1].pickedUp) { //Lots of Bullets
-        player.Stats.damage = Math.floor(player.Stats.damage / player.passives[1].SNA * 100) / 100;
-        player.passives[1].SNA = Math.floor((Pbullets.length + Ebullets.length) * 100) / 2000;
-        player.Stats.damage = Math.floor(player.Stats.damage * player.passives[1].SNA * 100) / 100;
+        player.Stats.damage = Math.floor(player.Stats.damage / player.passives[1].SNA * 1000) / 1000;
+        player.passives[1].SNA = (Math.floor((Pbullets.length + Ebullets.length) * 100) / 2000 )+ 1;
+        if(player.passives[1].SNA<1){player.passives[1].SNA=1;}else if(player.passives[1].SNA>4){player.passives[1].SNA=4;}
+        player.Stats.damage = Math.floor(player.Stats.damage * player.passives[1].SNA * 1000) / 1000;
     }
     if (player.passives[2].pickedUp) { //Emergency Ammo
         if (player.Stats.CurrentWeapon.ammo == 0 && player.passives[2].SNA > 0) {
