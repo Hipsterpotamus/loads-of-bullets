@@ -145,13 +145,13 @@ class Exit {
         }
         switch(direction){
             case "l":
-                this.pos = createVector(0,height/2-50);//Top-left Corner
+                this.pos = createVector(0,(height/2-50)/P);//Top-left Corner
                 this.width = 20;
                 this.height = 100;
                 this.leadsToX-=1;
                 break;
             case "r":
-                this.pos = createVector(1900,height/2-50);//Top-left Corner
+                this.pos = createVector(1900,(height/2-50)/P);//Top-left Corner
                 this.width = 20;
                 this.height = 100;
                 this.leadsToX+=1;
@@ -163,7 +163,7 @@ class Exit {
                 this.leadsToY-=1;
                 break;
             case "d":
-                this.pos = createVector(910,height-20);//Top-left Corner
+                this.pos = createVector(910,(height-20)/P);//Top-left Corner
                 this.width = 100;
                 this.height = 20;
                 this.leadsToY+=1;
