@@ -10,6 +10,7 @@ class Player {
         this.invinLength = 90;
         this.invincible = -100;
         this.color = "yellow";
+        this.passives = PASSIVEITEMS;
         this.show = function () {
             fillSet(this.color);
             if (this.INVINCIBLE()) {

@@ -29,6 +29,7 @@ function setup() {
 function draw() {
     if(menu=="Game"){
         interval++;rinterval++;
+        passiveCheck();
         background(0);
         player.move();
         player.show();
