@@ -180,6 +180,212 @@ function Roomstart(floor,seed,dir){
         case "1-3B":
             RedPappa(enemRand());
             break;
+        case "2-1":
+            Purple(enemRand());
+            Brown(enemRand());
+            Indigo(enemRand());
+            break;
+        case "2-2":
+            Steelman(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            break;
+        case "2-3":
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            break;
+        case "2-4":
+            Green(enemRand());
+            Green(enemRand());
+            Green(enemRand());
+            Green(enemRand());
+            Green(enemRand());
+            Green(enemRand());
+            Purple(enemRand());
+            Purple(enemRand());
+            break;
+        case "2-5":
+            Bully(enemRand());
+            Bully(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            break;
+        case "2-6":
+            Brown(enemRand());
+            Brown(enemRand());
+            Tinman(enemRand());
+            Tinman(enemRand());
+            Tinman(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            break;
+        case "2-7":
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Eyeman(enemRand());
+            Eyeman(enemRand());
+            Eyeman(enemRand());
+            break;
+        case "2-8":
+            Pink(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Brown(enemRand());
+            Brown(enemRand());
+            Tinman(enemRand());
+            break;
+        case "2-9":
+            Teal(enemRand());
+            Teal(enemRand());
+            Steelman(enemRand());
+            Tinman(enemRand());
+            break;
+        case "2-10":
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Steelman(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            break;
+        case "2-11":
+            Tinman(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            break;  
+        case "2-12":
+            BlueV(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            break;          
+        case "2-13":
+            Steelman(enemRand());
+            Steelman(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Red(enemRand());
+            Red(enemRand());
+            break;
+        case "2-14":
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            Blue(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            break;        
+        case "2-15":
+            Purple(enemRand());
+            Purple(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            break;
+        case "2-16":
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            BlueV(enemRand());
+            Steelman(enemRand());
+            Steelman(enemRand());
+            break;
+        case "2-17":
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Orange(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            break;
+        case "2-18":
+            Steelman(enemRand());
+            Steelman(enemRand());
+            Tinman(enemRand());
+            Tinman(enemRand());
+            Brown(enemRand());
+            Brown(enemRand());
+            Brown(enemRand());
+            Brown(enemRand());
+            Teal(enemRand());
+            Teal(enemRand());
+            break;
+        case "2-19":
+            Purple(enemRand());
+            Purple(enemRand());
+            Purple(enemRand());
+            Purple(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Red(enemRand());
+            Red(enemRand());
+            break;
+        case "2-20":
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Bully(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Indigo(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Pink(enemRand());
+            Brown(enemRand());
+            Brown(enemRand());
+            break;
+        case "2-1B":
+            PurplePrince(enemRand());
+            break;
+        case "2-2B":
+            Clockra(createVector(1600*P,800*P))
+            break;
+        case "2-3B":
+            TheAce(enemRand());
+            break;
     }
 }
 function enemRand(){

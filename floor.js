@@ -1,111 +1,115 @@
 class Floor {
-    constructor(level,type){
-        this.level = level;
+    constructor(lvl, type) {
+        this.level = lvl;
         this.type = type;
         this.keys = [];
         this.item = [];
         this.rooms = [];
-        this.seed = Math.floor(random(1000,10000));
+        this.seed = Math.floor(random(1000, 10000));
         this.floorL = 4;
         this.floorH = 3;
-        this.playerInside = createVector(0,0);
-        this.createRooms = function(){
+        this.playerInside = createVector(0, 0);
+        this.createRooms = function () {
             let RSEED;
-            for(let xr = 0;xr < this.floorL;xr++){
+            for (let xr = 0; xr < this.floorL; xr++) {
                 this.rooms[xr] = [];
-                for(let yr = 0;yr < this.floorH;yr++){
-                    switch(xr+yr){
+                for (let yr = 0; yr < this.floorH; yr++) {
+                    switch (xr + yr) {
                         case 0:
-                            RSEED = Math.floor(random(1,5));
+                            RSEED = Math.floor(random(1, 5));
                             break;
                         case 1:
-                            RSEED = Math.floor(random(1,5));
+                            RSEED = Math.floor(random(1, 5));
                             break;
                         case 2:
-                            RSEED = Math.floor(random(6,10));
+                            RSEED = Math.floor(random(6, 10));
                             break;
                         case 3:
-                            RSEED = Math.floor(random(11,15));
+                            RSEED = Math.floor(random(11, 15));
                             break;
                         case 4:
-                            RSEED = Math.floor(random(16,20));
+                            RSEED = Math.floor(random(16, 20));
                             break;
                         case 5:
-                            RSEED = Math.floor(random(1,3))+"B";
+                            RSEED = Math.floor(random(1, 3)) + "B";
                             break;
                     }
-                        
-                    
-                    this.rooms[xr][yr] = new Room(this.level,RSEED,"n",xr,yr);
-                    
-                    if(xr==0&&yr==0){
+
+
+                    this.rooms[xr][yr] = new Room(this.level, RSEED, "n", xr, yr);
+
+                    if (xr == 0 && yr == 0) {
                         this.rooms[xr][yr].playerInside = true;
-                    }else if(xr==this.floorL-1&&yr==this.floorH-1){
+                    } else if (xr == this.floorL - 1 && yr == this.floorH - 1) {
                         this.rooms[xr][yr].type = "n";
                     }
 
                 }
             }
-            let KKEY,TRE;
+            let KKEY, TRE;
             this.rooms[0][0].type = "entrance";
-            this.rooms[this.floorL-1][this.floorH-1].type = "boss";
+            this.rooms[this.floorL - 1][this.floorH - 1].type = "boss";
 
-            while(this.keys.length<3){      // Chooses a random room, if it's unused, put a key in it.
-                KKEY = createVector(Math.floor(random(0,this.floorL)),Math.floor(random(0,this.floorH)))
-                if(this.rooms[KKEY.x][KKEY.y].type=="n"){
-                        this.keys.push(KKEY);
-                        this.rooms[KKEY.x][KKEY.y].type = "key";
-                }    
+            while (this.keys.length < 3) { // Chooses a random room, if it's unused, put a key in it.
+                KKEY = createVector(Math.floor(random(0, this.floorL)), Math.floor(random(0, this.floorH)))
+                if (this.rooms[KKEY.x][KKEY.y].type == "n") {
+                    this.keys.push(KKEY);
+                    this.rooms[KKEY.x][KKEY.y].type = "key";
+                }
             }
-            while(true){    // Same as above but for items
-                TRE = createVector(Math.floor(random(0,this.floorL)),Math.floor(random(0,this.floorH)))
-                if(this.rooms[TRE.x][TRE.y].type=="n"){
-                        
-                        this.rooms[TRE.x][TRE.y].type = "item";
-                        break;
+            while (true) { // Same as above but for items
+                TRE = createVector(Math.floor(random(0, this.floorL)), Math.floor(random(0, this.floorH)))
+                if (this.rooms[TRE.x][TRE.y].type == "n") {
+
+                    this.rooms[TRE.x][TRE.y].type = "item";
+                    break;
                 }
             }
 
-        } 
-        this.showMiniMap = function(){
-            for(let xr = 0;xr < 4;xr++){
-                for(let yr = 0;yr < 3;yr++){
+        }
+        this.showMiniMap = function () {
+            for (let xr = 0; xr < 4; xr++) {
+                for (let yr = 0; yr < 3; yr++) {
                     rectMode(CORNER);
-                    if(!this.rooms[xr][yr].completed){fill(200)}else{fill(180,180,15);}
-                    strokeWeight(1*P)
+                    if (!this.rooms[xr][yr].completed) {
+                        fill(200)
+                    } else {
+                        fill(180, 180, 15);
+                    }
+                    strokeWeight(1 * P)
                     stroke(255);
-                    rect(1750*P+(xr*32*P),1000*heightP+(yr*24*heightP),30*P,22*heightP);
-                    
-                    if(this.rooms[xr][yr].type=="key"){
+                    rect(1750 * P + (xr * 32 * P), 1000 * heightP + (yr * 24 * heightP), 30 * P, 22 * heightP);
+
+                    if (this.rooms[xr][yr].type == "key") {
                         push();
-                            fillSet("light grey");
-                            strokeWeight(1.5*P);
-                            rect(1774*P+(xr*32*P),1009.5*heightP+(yr*24*heightP),2.5*P,10*P);
-                            rect(1770*P+(xr*32*P),1009.5*heightP+(yr*24*heightP),2.5*P,10*P);
-                            strokeWeight(2*P);
-                            stroke(255);
-                            rectMode(CENTER);
+                        fillSet("light grey");
+                        strokeWeight(1.5 * P);
+                        rect(1774 * P + (xr * 32 * P), 1009.5 * heightP + (yr * 24 * heightP), 2.5 * P, 10 * P);
+                        rect(1770 * P + (xr * 32 * P), 1009.5 * heightP + (yr * 24 * heightP), 2.5 * P, 10 * P);
+                        strokeWeight(2 * P);
+                        stroke(255);
+                        rectMode(CENTER);
 
-                            
 
-                            rect(1770*P+(xr*32*P),1012*heightP+(yr*24*heightP),12.5*P,5*P);
-                            ellipse(1758*P+(xr*32*P),1024*heightP+(yr*24*heightP)-11.5*heightP,11*P,11*P);
-                            
-                            
-                            
+
+                        rect(1770 * P + (xr * 32 * P), 1012 * heightP + (yr * 24 * heightP), 12.5 * P, 5 * P);
+                        ellipse(1758 * P + (xr * 32 * P), 1024 * heightP + (yr * 24 * heightP) - 11.5 * heightP, 11 * P, 11 * P);
+
+
+
                         pop();
                     }
-                    if(this.rooms[xr][yr].type === "item"){
+                    if (this.rooms[xr][yr].type === "item") {
                         push();
-                            fillSet("teal");
-                            noStroke();
-                            rectMode(CENTER);
-                            rect(1765*P+(xr*32*P),1011*heightP+(yr*24*heightP),15*P,15*P);
-                        pop();                    
+                        fillSet("teal");
+                        noStroke();
+                        rectMode(CENTER);
+                        rect(1765 * P + (xr * 32 * P), 1011 * heightP + (yr * 24 * heightP), 15 * P, 15 * P);
+                        pop();
                     }
-                    if(this.rooms[xr][yr].playerInside){
+                    if (this.rooms[xr][yr].playerInside) {
                         fillSet(player.color);
-                        ellipse(1765*P+(xr*32*P),1011*heightP+(yr*24*heightP),15*P,15*P);
+                        ellipse(1765 * P + (xr * 32 * P), 1011 * heightP + (yr * 24 * heightP), 15 * P, 15 * P);
                     }
                 }
             }
@@ -113,7 +117,7 @@ class Floor {
     }
 }
 class Room {
-    constructor(CurrentFloor,EnemySeed,type,X,Y){
+    constructor(CurrentFloor, EnemySeed, type, X, Y) {
         this.completed = false;
         this.floor = CurrentFloor;
         this.seed = EnemySeed;
@@ -122,12 +126,25 @@ class Room {
         this.X = X;
         this.Y = Y;
         this.exits = [];
-        if(X>0){this.exits.push(new Exit(this.X,this.Y,"l"));}if(X<floor.floorL-1){this.exits.push(new Exit(this.X,this.Y,"r"));}
-        if(Y>0){this.exits.push(new Exit(this.X,this.Y,"u"));}if(Y<floor.floorH-1){this.exits.push(new Exit(this.X,this.Y,"d"));}
+        if (X > 0) {
+            this.exits.push(new Exit(this.X, this.Y, "l"));
+        }
+        if (X < floor.floorL - 1) {
+            this.exits.push(new Exit(this.X, this.Y, "r"));
+        }
+        if (Y > 0) {
+            this.exits.push(new Exit(this.X, this.Y, "u"));
+        }
+        if (Y < floor.floorH - 1) {
+            this.exits.push(new Exit(this.X, this.Y, "d"));
+        }
+        if (X == floor.floorL - 1 && Y == floor.floorH - 1) {
+            this.exits.push(new Exit(this.X, this.Y, "nf"));
+        } // Next floor
     }
 }
 class Exit {
-    constructor(roomX,roomY,direction){
+    constructor(roomX, roomY, direction) {
         this.roomX = roomX;
         this.roomY = roomY;
         this.direction = direction;
@@ -138,91 +155,112 @@ class Exit {
         this.leadsToY = roomY;
         this.active = false;
         this.locked;
-        if((roomX == floor.floorL-2&&roomY == floor.floorH-1&&direction == "r")||(roomY == floor.floorH-2&&roomX == floor.floorL-1&&direction=="d")){
+        if ((roomX == floor.floorL - 2 && roomY == floor.floorH - 1 && direction == "r") || (roomY == floor.floorH - 2 && roomX == floor.floorL - 1 && direction == "d")) {
             this.locked = true;
-        }else{
+        } else {
             this.locked = false;
         }
-        switch(direction){
-            case "l":
-                this.pos = createVector(0,(height/2-50)/P);//Top-left Corner
+        switch (direction) {
+            case "l": //Left
+                this.pos = createVector(0, (height / 2 - 50) / P); //Top-left Corner
                 this.width = 20;
                 this.height = 100;
-                this.leadsToX-=1;
+                this.leadsToX -= 1;
                 break;
-            case "r":
-                this.pos = createVector(1900,(height/2-50)/P);//Top-left Corner
+            case "r": //Right
+                this.pos = createVector(1900, (height / 2 - 50) / P); //Top-left Corner
                 this.width = 20;
                 this.height = 100;
-                this.leadsToX+=1;
+                this.leadsToX += 1;
                 break;
-            case "u":
-                this.pos = createVector(910,0);//Top-left Corner
+            case "u": //Up
+                this.pos = createVector(910, 0); //Top-left Corner
                 this.width = 100;
                 this.height = 20;
-                this.leadsToY-=1;
+                this.leadsToY -= 1;
                 break;
-            case "d":
-                this.pos = createVector(910,(height-20)/P);//Top-left Corner
+            case "d": //Down
+                this.pos = createVector(910, (height - 20) / P); //Top-left Corner
                 this.width = 100;
                 this.height = 20;
-                this.leadsToY+=1;
-                break; 
+                this.leadsToY += 1;
+                break;
+            case "nf": //Next Floor
+                this.pos = createVector(910, (height - 20) / P); //TL corner
+                this.width = 100;
+                this.height = 20;
+                this.leadsToX = 0;
+                this.leadsToY = 0;
+                break;
         }
-        this.show = function(){
-            if(this.active){
-                
+        this.show = function () {
+            if (this.active) {
+
                 noStroke();
-                if(this.locked){fill(250,80,80,50);}else{fill(80,250,80,50);}
-                rect(this.pos.x * P,this.pos.y * P,this.width * P,this.height * P);
+                if (this.locked) {
+                    fill(250, 80, 80, 50);
+                } else {
+                    fill(80, 250, 80, 50);
+                }
+                rect(this.pos.x * P, this.pos.y * P, this.width * P, this.height * P);
             }
         }
-        this.playerHit = function(){
-            if(player.pos.x+player.r>this.pos.x&&player.pos.x-player.r<this.pos.x+this.width&&player.pos.y+player.r>this.pos.y&&player.pos.y-player.r<this.pos.y+this.height&&this.active&&!this.locked){
+        this.playerHit = function () {
+            if (player.pos.x + player.r > this.pos.x && player.pos.x - player.r < this.pos.x + this.width && player.pos.y + player.r > this.pos.y && player.pos.y - player.r < this.pos.y + this.height && this.active && !this.locked) {
                 floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = false;
-                floor.playerInside.x = this.leadsToX;floor.playerInside.y = this.leadsToY;
+                floor.playerInside.x = this.leadsToX;
+                floor.playerInside.y = this.leadsToY;
                 floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = true;
-                switch(direction){
+                switch (direction) {
                     case "r":
-                        player.pos = createVector(player.r+this.width,550);
+                        player.pos = createVector(player.r + this.width, 550);
                         break;
                     case "l":
-                        player.pos = createVector(1920-(player.r+this.width),550);
+                        player.pos = createVector(1920 - (player.r + this.width), 550);
                         break;
                     case "u":
-                        player.pos = createVector(960,1100-(this.height+player.r));
+                        player.pos = createVector(960, 1100 - (this.height + player.r));
                         break;
                     case "d":
-                        player.pos = createVector(960,player.r+this.height);
-                        break; 
+                        player.pos = createVector(960, player.r + this.height);
+                        break;
+                    case "nf":
+                        newFloor();
+                        break;
                 }
-                
+
                 enemies = [];
-                if(!floor.rooms[floor.playerInside.x][floor.playerInside.y].completed){
-                    Roomstart(1,floor.rooms[floor.playerInside.x][floor.playerInside.y].seed,direction);
+                if (!floor.rooms[floor.playerInside.x][floor.playerInside.y].completed) {
+                    Roomstart(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed, direction);
                 }
-                
+
             }
         }
     }
 }
 
-function EnemySpawnPos(){
-    let a = createVector(random(0,1920),random(0,1100));
-    if(XhitsY(a,player.pos,5,100)){
-        
+function EnemySpawnPos() {
+    let a = createVector(random(0, 1920), random(0, 1100));
+    if (XhitsY(a, player.pos, 5, 100)) {
+
     }
 }
-function revealExits(){
-    for(n in floor.rooms[floor.playerInside.x][floor.playerInside.y].exits){
+
+function revealExits() {
+    for (n in floor.rooms[floor.playerInside.x][floor.playerInside.y].exits) {
         floor.rooms[floor.playerInside.x][floor.playerInside.y].exits[n].active = true;
     }
-    
+
 }
-function unlockAll(){
-    for(EX in floor.rooms){
-        for(EY in floor.rooms[EX]){
-            for(EE in floor.rooms[EX][EY].exits){
+function newFloor(){
+    floor = new Floor(floor.level+1, 0);
+    floor.createRooms();
+    player.pos = createVector(1920 / 2, 100);
+}
+function unlockAll() {
+    for (EX in floor.rooms) {
+        for (EY in floor.rooms[EX]) {
+            for (EE in floor.rooms[EX][EY].exits) {
                 floor.rooms[EX][EY].exits[EE].locked = false;
             }
         }

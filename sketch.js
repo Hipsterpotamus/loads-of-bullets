@@ -11,8 +11,6 @@ let floor;
 let menu = "Home";
 let menuGun = "Pistol";
 
-
-
 function setup() {
     createCanvas(windowWidth, windowHeight); //init stuff
     P = windowWidth / 1920; //basic unit that converts pixel dimensions
@@ -121,6 +119,7 @@ function draw() {
             if(floor.rooms[floor.playerInside.x][floor.playerInside.y].type == "item"){
                 gainItem(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed);
             }
+            
             floor.rooms[floor.playerInside.x][floor.playerInside.y].type = "n";
             for(let xc = floor.keys.length-1;xc >= 0;xc--){
                 if(floor.keys[xc].x == floor.playerInside.x&&floor.keys[xc].y== floor.playerInside.y){
@@ -265,7 +264,7 @@ function startGame(){
     menu = "Game";
     floor = new Floor(1, 0);
     floor.createRooms();
-    Roomstart(floor.level,floor.rooms[floor.playerInside.x][floor.playerInside.y].seed,"r");
+    Roomstart(floor.level,floor.rooms[0][0].seed,"r");
     gameGoing = true;
 
 }

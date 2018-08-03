@@ -58,7 +58,7 @@ class Stats {
         this.itemReceiveTime = -300;
         this.Items = STATITEMS;
 
-
+        this.offeredGun = false;
     }
 }
 
@@ -120,6 +120,8 @@ class Gun {
 }
 
 
+//name, reload, damage, speed, range, size, color, maxAmmo, penetrative, explosion
+
 
 ToyGun = function () {
     return new Gun("Toy Gun", 1, 0.8, 0.66, 0.9, 0.75, "yellow", 1000, 0, 0);
@@ -143,6 +145,15 @@ Bazooka = function () {
     return new Gun("Bazooka", 0.125, 12, 4, 3, 2.5, "yellow", 50, 0, new exploOBJ(60, 2));
 }
 
+let OneGuns = [
+    Crossbow = function(){
+        return new Gun("Crossbow", 0.8, 2.5, 1.1, 1.2, 1.4, "yellow", 100, false, 0);
+    },
+    Minigun = function () {
+        return new Gun("Mini Gun", 5, 0.5, 1.25, 1, 1, "yellow", 500, 0, 0);
+    }
+
+];
 GodGun = function () {
     return new Gun("God Gun", 60, 150, 6, 10, 8, "yellow", 100000000, 0, 0);
 }
@@ -254,10 +265,26 @@ class Enemy {
                     fillSet(this.color);
                     ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
                     fillSet(this.bullet.color);
-                    ellipse((this.pos.x - this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);
-                    ellipse((this.pos.x + this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);
-                    ellipse(this.pos.x * P, (this.pos.y - this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);
-                    ellipse(this.pos.x * P, (this.pos.y + this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);
+                    ellipse((this.pos.x - this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//L
+                    ellipse((this.pos.x + this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//R
+                    ellipse(this.pos.x * P, (this.pos.y - this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//T
+                    ellipse(this.pos.x * P, (this.pos.y + this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//B
+                    break;
+                case "EightCircle":
+                    noStroke();
+                    fillSet(this.color);
+                    ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
+                    fillSet(this.bullet.color);
+                    ellipse((this.pos.x - this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//L
+                    ellipse((this.pos.x - this.r * 0.7) * P, (this.pos.y + this.r * 0.7) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//B-L
+                    ellipse(this.pos.x * P, (this.pos.y + this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//B
+                    ellipse((this.pos.x + this.r * 0.7) * P, (this.pos.y + this.r * 0.7) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//B-R
+                    ellipse((this.pos.x + this.r) * P, this.pos.y * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//R
+                    ellipse((this.pos.x + this.r * 0.7) * P, (this.pos.y - this.r * 0.7) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//T-R
+                    ellipse(this.pos.x * P, (this.pos.y - this.r) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//T
+                    ellipse((this.pos.x - this.r * 0.7) * P, (this.pos.y - this.r * 0.7) * P, this.bullet.r * 2 * P, this.bullet.r * 2 * P);//T-L
+                    
+                    
                     break;
                 case "CircleV":
                     push();
@@ -309,9 +336,9 @@ class Enemy {
                     push();
 
                     noStroke();
-                    translate(this.pos.x, this.pos.y);
+                    translate(this.pos.x * P, this.pos.y * P);
                     rotate(atan2(player.pos.y - this.pos.y, player.pos.x - this.pos.x) - 90);
-                    translate(-this.pos.x, -this.pos.y);
+                    translate(-this.pos.x * P, -this.pos.y * P);
                     fillSet(this.color);
                     ellipse(this.pos.x * P, this.pos.y * P, this.r * 1.75 * P, this.r * 2.5 * P);
                     rectMode(CENTER);
@@ -326,9 +353,9 @@ class Enemy {
                     push();
 
                     noStroke();
-                    translate(this.pos.x, this.pos.y);
+                    translate(this.pos.x * P, this.pos.y * P);
                     rotate(atan2(player.pos.y - this.pos.y, player.pos.x - this.pos.x) - 90);
-                    translate(-this.pos.x, -this.pos.y);
+                    translate(-this.pos.x * P, -this.pos.y * P);
                     fillSet(this.color);
                     ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
                     rectMode(CENTER);
@@ -337,6 +364,72 @@ class Enemy {
 
 
 
+                    pop();
+                    break;
+                case "Purple Prince":
+                    push();
+                    noStroke();
+                    fillSet(this.color);
+                    ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
+                    fillSet("yellow");
+                    beginShape();
+                    vertex((this.pos.x - this.r * 0.5) * P, (this.pos.y - this.r*0.9) * P);
+                    vertex((this.pos.x - this.r * 0.5) * P, (this.pos.y - this.r*1.4) * P);
+                    vertex((this.pos.x - this.r * 0.25) * P, (this.pos.y - this.r*1.15) * P);
+                    vertex((this.pos.x) * P, (this.pos.y - this.r*1.4) * P);
+                    vertex((this.pos.x + this.r * 0.25) * P, (this.pos.y - this.r*1.15) * P);
+                    vertex((this.pos.x + this.r * 0.5) * P, (this.pos.y - this.r*1.4) * P);
+                    vertex((this.pos.x + this.r * 0.5) * P, (this.pos.y - this.r*0.9) * P);
+                    
+                    
+                    endShape(CLOSE);
+                    pop();
+                    break;
+                case "Clockra":
+                    push();
+                    noStroke();
+                    fillSet(this.color);
+                    ellipse(this.pos.x * P, this.pos.y * P, this.r * 2 * P, this.r * 2 * P);
+                    
+                    stroke(0);
+                    strokeWeight(24*P);
+                    line((this.pos.x) * P,(this.pos.y - this.r) * P,this.pos.x * P,this.pos.y * P);
+                    translate(this.pos.x*P, this.pos.y*P);
+                    rotate(Math.floor((rinterval % 300)/5) * 6 - 25);
+                   
+                    translate(-this.pos.x*P, -this.pos.y*P);
+                    line((this.pos.x) * P,(this.pos.y - this.r) * P,this.pos.x * P,this.pos.y * P);
+                    fill(255);
+                    stroke(0);
+                    strokeWeight(2*P);
+                    ellipse((this.pos.x - this.r*0.5) * P, this.pos.y * P, this.r * 0.75 * P, this.r * 0.75 * P)
+                    ellipse((this.pos.x + this.r*0.5) * P, this.pos.y * P, this.r * 0.75 * P, this.r * 0.75 * P)
+                    fill(0);
+                    ellipse((this.pos.x - this.r*0.5) * P, this.pos.y * P, this.r * 0.4 * P, this.r * 0.4 * P)
+                    ellipse((this.pos.x + this.r*0.5) * P, this.pos.y * P, this.r * 0.4 * P, this.r * 0.4 * P)
+                    
+                    
+                    
+                    
+                    pop();
+                    break;
+                case "The Ace":
+                    push();
+                    noStroke();
+                    translate(this.pos.x * P, this.pos.y * P);
+
+
+                    rotate(atan2(player.pos.y - this.pos.y, player.pos.x - this.pos.x) + 90);
+                    translate(-this.pos.x * P, -this.pos.y * P);
+                    rectMode(CENTER);
+                    fillSet(this.color);
+                    rect(this.pos.x * P,this.pos.y * P,this.r * 4 * P,this.r * 1.25 * P,20*P);
+                    rect(this.pos.x * P,this.pos.y * P,this.r * 1 * P,this.r * 4 * P,20*P);
+                    fillSet("red")
+                    ellipse((this.pos.x - 40) * P,(this.pos.y - this.r * 0.5) * P,this.r * 0.2,this.r * 0.8);
+                    ellipse((this.pos.x + 40) * P,(this.pos.y - this.r * 0.5) * P,this.r * 0.2,this.r * 0.8);
+                    ellipse((this.pos.x - 80) * P,(this.pos.y - this.r * 0.5) * P,this.r * 0.2,this.r * 0.8);
+                    ellipse((this.pos.x + 80) * P,(this.pos.y - this.r * 0.5) * P,this.r * 0.2,this.r * 0.8);
                     pop();
                     break;
             }
@@ -395,6 +488,26 @@ class Enemy {
 
                     break;
 
+                case "FollowEightShoot":
+                    if(rinterval % 360 == 0){
+                        for (let dd = 0; dd < 4; dd++) {
+                            Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, RotateVector(this.shoot(), 45 + 90 * dd), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                        }
+                    }else if (rinterval % 180 == 0) {
+                        for (let oo = 0; oo < 4; oo++) {
+                            Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, RotateVector(this.shoot(), 90 * oo), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                        }
+
+
+                    }
+
+
+                    CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                    Direction = CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y));
+                    Direction.setMag(this.speed * P);
+
+                    break;
+
                 case "FollowShootV":
                     if ((rinterval % 720) >= 630) {
 
@@ -409,7 +522,22 @@ class Enemy {
                         Direction.setMag(this.speed * P);
                     }
                     break;
+                case "SeekAndFlee":
+                    if(dist(this.pos.x,this.pos.y,player.pos.x,player.pos.y)>player.Stats.range+20){
+                        CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                        Direction = CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y));
 
+                        Direction.setMag(this.speed/4 * P);
+                    }else{
+                        CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                        Direction = RotateVector(CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y)),180);
+
+                        Direction.setMag(this.speed/4 * P);
+                    }
+                    if(rinterval%60==0){
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                    }
+                    break;
                 case "Encircle":
                     
 
@@ -458,9 +586,28 @@ class Enemy {
                     }
                     break;
 
+                case "Steelman":
+                    CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                    Direction = CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y));
 
-
-
+                    
+                    if(rinterval%901>=800){
+                        if(rinterval%900==0){
+                            this.r = Math.floor(this.r / Math.pow(1.05,5) * 200)/200;
+                            for (let sm = 0; sm < 8; sm++) {
+                                Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, RotateVector(this.shoot(), 45 * sm), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                            }
+                        }else if(rinterval%10==0){
+                            this.r = Math.floor(this.r * 1.05 * 200)/200;
+                        }
+                        Direction.setMag(0);
+                    }else{
+                        Direction.setMag(this.speed * P);
+                    }
+                            
+                            
+                            
+                    break;
                 case "Sixy":
                     // Bounces Sixy off of walls, he always has a velocity of either 1,1 -1,1 1,-1 -1,-1 Rotates 90 or -90 degrees when it approaches the walls
                     if (!this.vel) {
@@ -534,7 +681,61 @@ class Enemy {
 
                     Direction.setMag(this.speed * P);
                     break;
+                case "Purple Prince":
+                    if(rinterval%1440<720){
+                        if(dist(this.pos.x,this.pos.y,player.pos.x,player.pos.y)>player.Stats.range+22){
+                            CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                            Direction = CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y));
 
+                            Direction.setMag(this.speed/4 * P);
+                        }else{
+                            CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                            Direction = RotateVector(CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y)),180);
+
+                            Direction.setMag(this.speed/4 * P);
+                        }
+                        if(rinterval%60==0){
+                            Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                        }
+                    }else if(rinterval%720==0&&rinterval!=0){
+                        this.r = 0;
+                        Direction = createVector(0,0);
+                        for(let PPPP = 0;PPPP < 10;PPPP++){Purple(enemRand());}
+                    }else if(rinterval%1440>1315&&rinterval%5==0){
+                        this.r+=1;
+                        Direction = createVector(0,0);
+                    }else if(rinterval%1440==1439){
+                        for(let PuP = enemies.length-1; PuP >= 0; PuP--){
+                            if(enemies[PuP].name=="Purple"){
+                                enemies.splice(PuP,1);
+                            }
+                        }
+                        Direction = createVector(0,0);
+                    }else{
+                        Direction = createVector(0,0);
+                    }
+                    break;
+                case "Clockra":
+                    if(rinterval%5==0){
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, RotateVector(this.shoot(), Math.floor((rinterval % 300)/5) * 6), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x, this.pos.y), this.bullet.pen, this.bullet.explosion));
+                    }
+                    Direction = createVector(0,0);
+                    break;
+                case "The Ace":
+                    CURRENTTARGET = createVector(player.pos.x, player.pos.y);
+                    Direction = CURRENTTARGET.sub(createVector(this.pos.x, this.pos.y));
+
+                    Direction.setMag(this.speed * P);
+                    if(rinterval%60==0){
+                        let NDirection = RotateVector(createVector(Direction.x,Direction.y),90);NDirection.setMag(40*P)
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x+NDirection.x, this.pos.y + NDirection.y), this.bullet.pen, this.bullet.explosion));
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x-NDirection.x, this.pos.y - NDirection.y), this.bullet.pen, this.bullet.explosion));
+                        NDirection.setMag(80*P)
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x+NDirection.x, this.pos.y + NDirection.y), this.bullet.pen, this.bullet.explosion));
+                        Ebullets.push(new Bullet(this.bullet.r, this.bullet.damage, this.bullet.speed, this.bullet.range, this.shoot(), this.bullet.color, createVector(this.pos.x-NDirection.x, this.pos.y - NDirection.y), this.bullet.pen, this.bullet.explosion));
+                    }
+                    break;
             }
             
 
