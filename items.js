@@ -33,6 +33,7 @@ function gainItem(roomSeed) {
     let Count = 1;
     let RS = ((floor.seed * roomSeed * Count) % player.Stats.Items.length);
     if(floor.seed%3==0){
+        RS = ((floor.seed * roomSeed * Count) % player.passives.length);
         while (player.passives[RS].pickedUp) {
             Count++;
             RS = ((floor.seed * roomSeed * Count) % player.passives.length);
