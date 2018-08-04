@@ -8,7 +8,7 @@ Green = function (startPos) {
     enemies.push(new Enemy("Green", "Circle", 15, 2, "Encircle", 1, 4, startPos, "green", false, false, false));
 }
 Orange = function (startPos) {
-    enemies.push(new Enemy("Orange", "Circle", 15, 5, "RandomA", 1.5, 2, startPos, "orange", false, false, false));
+    enemies.push(new Enemy("Orange", "Circle", 15, 5, "RandomA", 2, 1.5, startPos, "orange", false, false, false));
 }
 Teal = function (startPos) {
     enemies.push(new Enemy("Teal", "Circle", 15, 1.5, "FollowShootShotG", 1, 2, startPos, "teal", "Basic", new Bullet(5, 0.5, 3, 200, false, "teal", 0, false, false), false));

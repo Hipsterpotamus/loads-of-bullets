@@ -60,9 +60,14 @@ function draw() {
         for (let y = enemies.length - 1; y >= 0; y--) {
             for (let z = Pbullets.length - 1; z >= 0; z--) {
                 if (Pbullets[z].hit(enemies[y])) {
-                    enemies[y].health -= Pbullets[z].damage;
-
-                    Pbullets.splice(z, 1);
+                    
+                    if(!Pbullets[z].pen){
+                        enemies[y].health -= Pbullets[z].damage;
+                        Pbullets.splice(z, 1);
+                    }else{
+                        enemies[y].health -= Pbullets[z].damage * 0.33;
+                    }
+                    
                 }
 
             }
@@ -117,9 +122,11 @@ function draw() {
         if (enemies.length == 0&&floor.rooms[floor.playerInside.x][floor.playerInside.y].completed == false) {
             floor.rooms[floor.playerInside.x][floor.playerInside.y].completed = true;
             if(floor.rooms[floor.playerInside.x][floor.playerInside.y].type == "item"){
-                gainItem(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed);
+                gainItem();
             }
-            
+            if(floor.rooms[floor.playerInside.x][floor.playerInside.y].type == "boss"){
+                gainGun(floor.level);
+            }
             floor.rooms[floor.playerInside.x][floor.playerInside.y].type = "n";
             for(let xc = floor.keys.length-1;xc >= 0;xc--){
                 if(floor.keys[xc].x == floor.playerInside.x&&floor.keys[xc].y== floor.playerInside.y){
@@ -163,7 +170,7 @@ function draw() {
         textSize(35 * heightP);
         text(player.Stats.CurrentWeapon.name, 80 * P, 1050 * heightP);
         textSize(25 * heightP);
-        text(player.Stats.Weapons[1].name + " " + player.Stats.Weapons[1].ammo + " [TAB]", 120 * P, 1075 * heightP);
+        text(player.Stats.Weapons[1].name + " " + player.Stats.Weapons[1].ammo + " [SHIFT]", 120 * P, 1075 * heightP);
         if((player.Stats.CurrentWeapon.ammoReload / 60)<1){rect(50 * P, 965 * heightP,((player.Stats.CurrentWeapon.ammoReload / 60) * 150) * P, 2 * P);}else{
             rect(50 * P, 965 * heightP,150 * P, 2 * P);
         }
@@ -185,6 +192,15 @@ function draw() {
             text(player.Stats.newestItem.desc, 960 * P, 975 * heightP);
             textAlign(LEFT);
             
+        }
+        if(player.Stats.offeredGun){
+            textAlign(CENTER);
+            fillSet(player.color);
+            textSize(50 * heightP);
+            text(player.Stats.offeredGun.name, 960 * P, 900 * heightP);
+            textSize(25 * heightP);
+            text("[TAB] Drop Equipped Gun for "+player.Stats.offeredGun.name, 960 * P, 975 * heightP);
+            textAlign(LEFT);
         }
     }else if(menu == "Home"){
         background(0);
@@ -282,10 +298,19 @@ $(window).keydown(function (event) {
         case 83: //S key (down)
             player.vel.y = 1;
             break;
-        case 9: //Tab key (switches to secondary)
+        case 16: //Shift key (switches to secondary)
             event.preventDefault();
             player.Stats.Weapons[0] = [player.Stats.Weapons[1], player.Stats.Weapons[1] = player.Stats.Weapons[0]][0];
             player.Stats.CurrentWeapon = player.Stats.Weapons[0];
+            break;
+        case 9: //Tab key (drops gun)
+            event.preventDefault();
+            if(player.Stats.offeredGun){
+                player.Stats.Weapons[0] = player.Stats.offeredGun;
+                player.Stats.CurrentWeapon = player.Stats.Weapons[0];
+                player.Stats.offeredGun = false;
+            }
+            
             break;
         case 49:
             menuGun = "Pistol";
