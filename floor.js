@@ -115,8 +115,8 @@ class Floor {
                         let POS = createVector(1765 * P + (xr * 32 * P), 1013 * heightP + (yr * 24 * heightP));
 
                         ellipse(POS.x, POS.y, 7.5 * 2 * P, 7.5 * 2 * P);
-                        triangle((POS.x - 30 * 7.5 / 20) * P, (POS.y - 30 * 7.5 / 20) * P, (POS.x - 15 * 7.5 / 20) * P, (POS.y - 7.5 * 7.5 / 20) * P, (POS.x - 7.5 * 7.5 / 20) * P, (POS.y - 15 * 7.5 / 20) * P);
-                        triangle((POS.x + 30 * 7.5 / 20) * P, (POS.y - 30 * 7.5 / 20) * P, (POS.x + 15 * 7.5 / 20) * P, (POS.y - 7.5 * 7.5 / 20) * P, (POS.x + 7.5 * 7.5 / 20) * P, (POS.y - 15 * 7.5 / 20) * P);
+                        triangle((POS.x - 30 * 7.5 / 20), (POS.y - 30 * 7.5 / 20), (POS.x - 15 * 7.5 / 20), (POS.y - 7.5 * 7.5 / 20), (POS.x - 7.5 * 7.5 / 20), (POS.y - 15 * 7.5 / 20));
+                        triangle((POS.x + 30 * 7.5 / 20), (POS.y - 30 * 7.5 / 20), (POS.x + 15 * 7.5 / 20), (POS.y - 7.5 * 7.5 / 20), (POS.x + 7.5 * 7.5 / 20), (POS.y - 15 * 7.5 / 20));
                     }
                     if (this.rooms[xr][yr].playerInside) {
                         stroke(0);

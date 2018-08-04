@@ -70,7 +70,7 @@ RedPappa = function(startPos){
     }
 
 PurplePrince = function(startPos){
-    enemies.push(new Enemy("Purple Prince", "Purple Prince", 25, 6, "Purple Prince", 2, 20, startPos, "purple", "Basic", new Bullet(5, 2, 6, 350, false, "purple", 0, false, false), false));
+    enemies.push(new Enemy("Purple Prince", "Purple Prince", 25, 6, "Purple Prince", 2, 25, startPos, "purple", "Basic", new Bullet(5, 2, 6, 350, false, "purple", 0, false, false), false));
 }
 Clockra = function(startPos){
     enemies.push(new Enemy("Clockra", "Clockra", 160, 6, "Clockra", 2, 35, startPos, "white", "Up", new Bullet(10, 1.5, 7, 1000, false, "white", 0, false, false), false));

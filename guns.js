@@ -23,28 +23,26 @@ class Gun {
             switch (this.name) {
                 case "Shotgun":
                     this.reload = 0.5;
-                    //Loops and shoots 5 bullets with SG, start rotated -10 degrees and adds 5 per shot
+                    //Loops and shoots 7 bullets with SG, start rotated -15 degrees and adds 5 per shot
                     for (let sg = 0; sg < 7; sg++) {
                         Pbullets.push(new Bullet(player.Stats.size * this.size, player.Stats.damage * this.damage, player.Stats.speed * this.speed, player.Stats.range * this.range, RotateVector(FindPlayerDirection(), ((5 * sg) - 15) + random(-7, 7)), this.color, createVector(player.pos.x, player.pos.y), this.penetrative, this.explosion));
                     }
-                    //Creates a jolt which sends you backwards when you fire. Will probably be removed, reworked, or placed into a function and repeated
-                    pushBackDIR = createVector(-FindPlayerDirection().x, -FindPlayerDirection().y);
-                    pushBackDIR.setMag(15 * P);
-                    player.pos.add(pushBackDIR);
+                    pushBack(15*P);
                     break;
                 case "Quad Shotgun":
                     this.reload = 0.5;
-                    //Loops and shoots 5 bullets with SG, start rotated -10 degrees and adds 5 per shot
+                    //Loops and shoots 14 bullets with SG, start rotated -15 degrees and adds 2.5 per shot
                     for (let qsg = 0; qsg < 14; qsg++) {
                         Pbullets.push(new Bullet(player.Stats.size * this.size, player.Stats.damage * this.damage, player.Stats.speed * this.speed, player.Stats.range * this.range, RotateVector(FindPlayerDirection(), ((2.5 * qsg) - 15) + random(-5, 5)), this.color, createVector(player.pos.x, player.pos.y), this.penetrative, this.explosion));
                     }
-                    //Creates a jolt which sends you backwards when you fire. Will probably be removed, reworked, or placed into a function and repeated
-                    pushBackDIR = createVector(-FindPlayerDirection().x, -FindPlayerDirection().y);
-                    pushBackDIR.setMag(30 * P);
-                    player.pos.add(pushBackDIR);
+                    
+                    pushBack(30*P);
+                    break;
+                case "Deagle":
+                    pushBack(5*P);Pbullets.push(new Bullet(player.Stats.size * this.size, player.Stats.damage * this.damage, player.Stats.speed * this.speed, player.Stats.range * this.range, FindPlayerDirection(), this.color, createVector(player.pos.x, player.pos.y), this.penetrative, this.explosion));
                     break;
                 default:
-                    Pbullets.push(new Bullet(player.Stats.size * this.size, player.Stats.damage * this.damage, player.Stats.speed * this.speed, player.Stats.range * this.range, FindPlayerDirection(), this.color, createVector(player.pos.x, player.pos.y), this.penetrative, this.explosion))
+                    Pbullets.push(new Bullet(player.Stats.size * this.size, player.Stats.damage * this.damage, player.Stats.speed * this.speed, player.Stats.range * this.range, FindPlayerDirection(), this.color, createVector(player.pos.x, player.pos.y), this.penetrative, this.explosion));
                     break;
             }
             if (this.ammo < 1) {
@@ -78,7 +76,7 @@ Shotgun = function () {
     return new Gun("Shotgun", 0.5, 0.66, 1, 0.75, 0.66, "yellow", 75, 0, 0);
 }
 SniperRifle = function () {
-    return new Gun("Sniper Rifle", 0.33, 8, 3, 3, 0.5, "yellow", 30, true, 0);
+    return new Gun("Sniper Rifle", 0.33, 8, 3, 3, 0.75, "yellow", 30, true, 0);
 }
 AssaultRifle = function () {
     return new Gun("Assault Rifle", 3, 0.75, 1.5, 1.5, 0.75, "yellow", 150, 0, 0);
@@ -97,11 +95,13 @@ let OneGuns = [
 
     new Gun("Quad Shotgun", 0.5, 0.66, 1, 0.75, 0.66, "yellow", 75, 0, false),
 
-    new Gun("Precision Sniper", 0.33, 14, 3, 3, 0.5, "yellow", 30, true, 0),
+    new Gun("Precision Sniper", 0.33, 14, 3, 3, 0.75, "yellow", 30, true, 0),
 
     new Gun("Rapid Fire RPG", 0.5, 8, 4, 3, 2.5, "yellow", 100, 0, new exploOBJ(60, 2)),
 
-    new Gun("Seedling Shooter", 3, 0.75, 1.25, 1, 0.75, "brown", 200, true, false)
+    new Gun("Seedling Shooter", 3, 0.75, 1.25, 1, 0.75, "brown", 200, true, false),
+
+    new Gun("Deagle", 1.5, 3, 1.1, 1, 1, "yellow", 100, false, false)
 ];
 GodGun = function () {
     return new Gun("God Gun", 60, 150, 6, 10, 8, "yellow", 100000000, 0, 0);
@@ -118,4 +118,7 @@ function gainGun(level){
             break;
     }
 
+}
+function pushBack(mag){ //Creates a kickback effect with certain guns
+    return player.pos.add(createVector(-FindPlayerDirection().x, -FindPlayerDirection().y).setMag(mag));
 }

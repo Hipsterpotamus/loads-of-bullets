@@ -32,7 +32,7 @@ class PassiveItem {
 function gainItem() {
     let Count = 1;
     let RS = ((floor.seed * Count) % player.Stats.Items.length);
-    if(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed%3==0){
+    if(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed%2==0){
         RS = ((floor.seed * Count) % player.passives.length);
         while (player.passives[RS].pickedUp) {
             Count++;
@@ -91,7 +91,8 @@ let STATITEMS = [
 let PASSIVEITEMS = [
     bottledRage = new PassiveItem(false, 1, 0, 0, "Bottled Rage", "My pain is your pain", 0, 1),
     lotsOfBullets = new PassiveItem(false, 1, 0, 0, "Lots of Bullets", "More Bullets, More Damage", 0, 2),
-    emergencyAmmo = new PassiveItem(false, 2, 0, 0, "Emergency Ammo", "Reloads two empty guns", 0, 3)
+    emergencyAmmo = new PassiveItem(false, 2, 0, 0, "Emergency Ammo", "Reloads two empty guns", 0, 3),
+    livingBullets = new PassiveItem(false, 0, 0, 0, "Living Bullets", "Watch them grow", 0, 4)
 ];
 
 function passiveCheck() {
@@ -111,6 +112,14 @@ function passiveCheck() {
         if (player.Stats.CurrentWeapon.ammo == 0 && player.passives[2].SNA > 0) {
             player.passives[2].SNA -= 1;
             player.Stats.CurrentWeapon.ammo = player.Stats.CurrentWeapon.maxAmmo
+        }
+    }
+    if (player.passives[3].pickedUp) { //Living Bullets
+        for(bbb in Pbullets){
+            if(player.Stats.CurrentWeapon.name == "Seedling Shooter"){Pbullets[bbb].r += 1/(0.3/(Math.floor(((player.Stats.speed/10)+player.Stats.CurrentWeapon.speed)/0.2)/10));}else{//Seedling Shooter Synergy
+                Pbullets[bbb].r += 1/(0.8/(Math.floor(((player.Stats.speed/10)+player.Stats.CurrentWeapon.speed)/0.2)/10));//Adjusts growth so that slower bullets don't grow more and faster bullets do
+            }
+            
         }
     }
 }

@@ -9,13 +9,13 @@ let interval = 0,rinterval = 0;
 let explosions = [];
 let floor;
 let menu = "Home";
-let menuGun = "Pistol";
+let menuGun;
 
 function setup() {
     createCanvas(windowWidth, windowHeight); //init stuff
     P = windowWidth / 1920; //basic unit that converts pixel dimensions
     heightP = windowHeight / 1100; //same for height, used less
-    
+    menuGun = Math.floor(random(1,6.999));
     
     frameRate(60);
     background(0);
@@ -233,17 +233,17 @@ function draw() {
         ellipse(1200 * P, 330 * heightP, 50 * P, 100 * heightP);        
 
         textSize(35*P)
-        if(menuGun == "Pistol"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Pistol"||menuGun == 1){fillSet("teal");}else{fillSet("yellow");}
         text("[1] Pistol", 200 * P, 800 * heightP);
-        if(menuGun == "Machine Gun"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Machine Gun"||menuGun == 2){fillSet("teal");}else{fillSet("yellow");}
         text("[2] Machine Gun", 500 * P, 800 * heightP);
-        if(menuGun == "Shotgun"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Shotgun"||menuGun == 3){fillSet("teal");}else{fillSet("yellow");}
         text("[3] Shotgun", 800 * P, 800 * heightP);
-        if(menuGun == "Sniper Rifle"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Sniper Rifle"||menuGun == 4){fillSet("teal");}else{fillSet("yellow");}
         text("[4] Sniper Rifle", 200 * P, 900 * heightP);
-        if(menuGun == "Assault Rifle"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Assault Rifle"||menuGun == 5){fillSet("teal");}else{fillSet("yellow");}
         text("[5] Assault Rifle", 500 * P, 900 * heightP);
-        if(menuGun == "Bazooka"){fillSet("teal");}else{fillSet("yellow");}
+        if(menuGun == "Bazooka"||menuGun == 6){fillSet("teal");}else{fillSet("yellow");}
         text("[6] Bazooka", 800 * P, 900 * heightP);
         textSize(60*P);fillSet("yellow");
         text("[Enter] START", 1400 * P, 850 * heightP);
@@ -257,22 +257,22 @@ function draw() {
 
 function startGame(){
     switch(menuGun){
-        case "Pistol":
+        case 1:
             player = new Player(20,Pistol());
             break;
-        case "Machine Gun":
+        case 2:
             player = new Player(20,MachineGun());
             break;
-        case "Shotgun":
+        case 3:
             player = new Player(20,Shotgun());
             break;
-        case "Sniper Rifle":
+        case 4:
             player = new Player(20,SniperRifle());
             break;
-        case "Assault Rifle":
+        case 5:
             player = new Player(20,AssaultRifle());
             break;
-        case "Bazooka":
+        case 6:
             player = new Player(20,Bazooka());
             break;
     }
@@ -313,22 +313,22 @@ $(window).keydown(function (event) {
             
             break;
         case 49:
-            menuGun = "Pistol";
+            menuGun = 1;
             break;
         case 50:
-            menuGun = "Machine Gun";
+            menuGun = 2;
             break;
         case 51:
-            menuGun = "Shotgun";
+            menuGun = 3;
             break;
         case 52:
-            menuGun = "Sniper Rifle";
+            menuGun = 4;
             break;
         case 53:
-            menuGun = "Assault Rifle";
+            menuGun = 5;
             break;
         case 54:
-            menuGun = "Bazooka";
+            menuGun = 6;
             break;
         case 13:
             if(menu == "Home"){startGame();}
