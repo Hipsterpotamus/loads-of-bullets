@@ -99,7 +99,7 @@ let OneGuns = [
 
     new Gun("Precision Sniper", 0.33, 14, 3, 3, 0.5, "yellow", 30, true, 0),
 
-    new Gun("Rapid Fire RPG", 0.5, 8, 4, 3, 2.5, "yellow", 10, 0, new exploOBJ(60, 2))
+    new Gun("Rapid Fire RPG", 0.5, 8, 4, 3, 2.5, "yellow", 100, 0, new exploOBJ(60, 2))
 ];
 GodGun = function () {
     return new Gun("God Gun", 60, 150, 6, 10, 8, "yellow", 100000000, 0, 0);
