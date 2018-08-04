@@ -108,7 +108,7 @@ function draw() {
                 noStroke();
                 fill(255, 70, 10);
 
-                ellipse(explosions[vv].pos.x, explosions[vv].pos.y, explosions[vv].r * 2, explosions[vv].r * 2);
+                ellipse(explosions[vv].pos.x * P, explosions[vv].pos.y * P, explosions[vv].r * 2 * P, explosions[vv].r * 2 * P);
                 explosions[vv].age++;
             }
 

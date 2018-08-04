@@ -46,7 +46,7 @@ class Floor {
 
                 }
             }
-            let KKEY, TRE;
+            let KKEY, TRE, EMPTY;
             this.rooms[0][0].type = "entrance";
             this.rooms[this.floorL - 1][this.floorH - 1].type = "boss";
 
@@ -65,6 +65,36 @@ class Floor {
                     break;
                 }
             }
+            while (true) { // Creates the empty room, and the removes the entrances from other rooms
+                EMPTY = createVector(Math.floor(random(0, this.floorL)), Math.floor(random(0, this.floorH)));
+                console.log(EMPTY);
+                if (this.rooms[EMPTY.x][EMPTY.y].type == "n") {
+
+                    this.rooms[EMPTY.x][EMPTY.y].type = "empty";
+                    if(EMPTY.x>0){
+                        console.log(this.rooms[EMPTY.x-1][EMPTY.y].exits)
+                        for(let Er = 0; Er < this.rooms[EMPTY.x-1][EMPTY.y].exits.length; Er++){
+                            if(this.rooms[EMPTY.x-1][EMPTY.y].exits[Er].direction=="r"){this.rooms[EMPTY.x-1][EMPTY.y].exits.splice(Er,1)}
+                        }
+                    }
+                    if(EMPTY.x<this.floorL-1){
+                        for(let El = 0; El < this.rooms[EMPTY.x+1][EMPTY.y].exits.length; El++){
+                            if(this.rooms[EMPTY.x+1][EMPTY.y].exits[El].direction=="l"){this.rooms[EMPTY.x+1][EMPTY.y].exits.splice(El,1)}
+                        }
+                    }
+                    if(EMPTY.y>0){
+                        for(let Ed = 0; Ed < this.rooms[EMPTY.x][EMPTY.y-1].exits.length; Ed++){
+                            if(this.rooms[EMPTY.x][EMPTY.y-1].exits[Ed].direction=="d"){this.rooms[EMPTY.x][EMPTY.y-1].exits.splice(Ed,1)}
+                        }
+                    }
+                    if(EMPTY.y<this.floorH-1){
+                        for(let Eu = 0; Eu < this.rooms[EMPTY.x][EMPTY.y+1].exits.length; Eu++){
+                            if(this.rooms[EMPTY.x][EMPTY.y+1].exits[Eu].direction=="u"){this.rooms[EMPTY.x][EMPTY.y+1].exits.splice(Eu,1)}
+                        }
+                    }
+                    break;
+                }
+            }
 
         }
         this.showMiniMap = function () {
@@ -78,7 +108,10 @@ class Floor {
                     }
                     strokeWeight(1 * P)
                     stroke(255);
-                    rect(1750 * P + (xr * 32 * P), 1000 * heightP + (yr * 24 * heightP), 30 * P, 22 * heightP);
+                    if(this.rooms[xr][yr].type != "empty"){
+                        rect(1750 * P + (xr * 32 * P), 1000 * heightP + (yr * 24 * heightP), 30 * P, 22 * heightP);
+                    }
+                    
 
                     if (this.rooms[xr][yr].type == "key") {
                         push();

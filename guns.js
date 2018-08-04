@@ -67,22 +67,22 @@ ToyGun = function () {
     return new Gun("Toy Gun", 1, 0.8, 0.66, 0.9, 0.75, "yellow", 1000, 0, 0);
 }
 Pistol = function () {
-    return new Gun("Pistol", 1.5, 1, 1, 1, 1, "yellow", 100, 0, 0);
+    return new Gun("Pistol", 1.5, 1, 1, 1, 1, "yellow", 150, 0, 0);
 }
 MachineGun = function () {
-    return new Gun("Machine Gun", 6, 0.25, 1.25, 1, 0.75, "yellow", 500, 0, 0);
+    return new Gun("Machine Gun", 6, 0.25, 1.25, 1, 0.75, "yellow", 700, 0, 0);
 }
 Shotgun = function () {
-    return new Gun("Shotgun", 0.5, 0.66, 1, 0.75, 0.66, "yellow", 75, 0, 0);
+    return new Gun("Shotgun", 0.5, 0.66, 1, 0.75, 0.66, "yellow", 125, 0, 0);
 }
 SniperRifle = function () {
-    return new Gun("Sniper Rifle", 0.33, 8, 3, 3, 0.75, "yellow", 30, true, 0);
+    return new Gun("Sniper Rifle", 0.33, 8, 3, 3, 0.75, "yellow", 45, true, 0);
 }
 AssaultRifle = function () {
-    return new Gun("Assault Rifle", 3, 0.75, 1.5, 1.5, 0.75, "yellow", 150, 0, 0);
+    return new Gun("Assault Rifle", 3, 0.75, 1.5, 1.5, 0.75, "yellow", 225, 0, 0);
 }
 Bazooka = function () {
-    return new Gun("Bazooka", 0.125, 12, 4, 3, 2.5, "yellow", 50, 0, new exploOBJ(60, 2));
+    return new Gun("Bazooka", 0.125, 12, 4, 3, 2.5, "yellow", 75, 0, new exploOBJ(60, 2));
 }
 
 let OneGuns = [
