@@ -32,7 +32,7 @@ class PassiveItem {
 function gainItem() {
     let Count = 1;
     let RS = ((floor.seed * Count) % player.Stats.Items.length);
-    if(floor.seed%3==0){
+    if(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed%3==0){
         RS = ((floor.seed * Count) % player.passives.length);
         while (player.passives[RS].pickedUp) {
             Count++;

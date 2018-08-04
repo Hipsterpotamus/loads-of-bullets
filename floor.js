@@ -82,12 +82,13 @@ class Floor {
 
                     if (this.rooms[xr][yr].type == "key") {
                         push();
-                        fillSet("light grey");
+                        fillSet("white");
+                        stroke(0);
                         strokeWeight(1.5 * P);
                         rect(1774 * P + (xr * 32 * P), 1009.5 * heightP + (yr * 24 * heightP), 2.5 * P, 10 * P);
                         rect(1770 * P + (xr * 32 * P), 1009.5 * heightP + (yr * 24 * heightP), 2.5 * P, 10 * P);
                         strokeWeight(2 * P);
-                        stroke(255);
+                        
                         rectMode(CENTER);
 
 
@@ -101,13 +102,25 @@ class Floor {
                     }
                     if (this.rooms[xr][yr].type === "item") {
                         push();
-                        fillSet("teal");
+                        fillSet("yellow");
                         noStroke();
                         rectMode(CENTER);
-                        rect(1765 * P + (xr * 32 * P), 1011 * heightP + (yr * 24 * heightP), 15 * P, 15 * P);
+                        star(1765 * P + (xr * 32 * P), 1011 * heightP + (yr * 24 * heightP), 5*P, 10*P, 5);
                         pop();
                     }
+                    if (this.rooms[xr][yr].type === "boss"){
+                        fillSet("red");
+                        fillSet(this.color);
+                        noStroke();
+                        let POS = createVector(1765 * P + (xr * 32 * P), 1013 * heightP + (yr * 24 * heightP));
+
+                        ellipse(POS.x, POS.y, 7.5 * 2 * P, 7.5 * 2 * P);
+                        triangle((POS.x - 30 * 7.5 / 20) * P, (POS.y - 30 * 7.5 / 20) * P, (POS.x - 15 * 7.5 / 20) * P, (POS.y - 7.5 * 7.5 / 20) * P, (POS.x - 7.5 * 7.5 / 20) * P, (POS.y - 15 * 7.5 / 20) * P);
+                        triangle((POS.x + 30 * 7.5 / 20) * P, (POS.y - 30 * 7.5 / 20) * P, (POS.x + 15 * 7.5 / 20) * P, (POS.y - 7.5 * 7.5 / 20) * P, (POS.x + 7.5 * 7.5 / 20) * P, (POS.y - 15 * 7.5 / 20) * P);
+                    }
                     if (this.rooms[xr][yr].playerInside) {
+                        stroke(0);
+                        strokeWeight(2*P);
                         fillSet(player.color);
                         ellipse(1765 * P + (xr * 32 * P), 1011 * heightP + (yr * 24 * heightP), 15 * P, 15 * P);
                     }
