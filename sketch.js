@@ -248,10 +248,10 @@ function draw() {
         textSize(60*P);fillSet("yellow");
         text("[Enter] START", 1400 * P, 850 * heightP);
     }
-    noFill();
-    stroke(255);
-    strokeWeight(1 * P);
-    ellipse(mouseX, mouseY, 15 * P, 15 * P);
+    // noFill();
+    // stroke(255);
+    // strokeWeight(1 * P);
+    // ellipse(mouseX, mouseY, 15 * P, 15 * P);
 }
 
 
