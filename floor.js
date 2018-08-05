@@ -276,6 +276,9 @@ class Exit {
                 }
 
                 enemies = [];
+                lowobstacles = [];
+                highobstacles = [];
+                putUpObs(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed);
                 if (!floor.rooms[floor.playerInside.x][floor.playerInside.y].completed) {
                     Roomstart(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed, direction);
                 }

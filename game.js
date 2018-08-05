@@ -22,7 +22,14 @@ class Player {
         };
         this.move = function () {
             let velocity = createVector(this.vel.x, this.vel.y);
-            this.pos.add(velocity.setMag(this.speed));
+            velocity.setMag(this.speed);
+            if(inScreen(this.pos.x + velocity.x, this.pos.y + velocity.y, this.r)&& !hittingObstacles (this.pos.x + velocity.x, this.pos.y + velocity.y, this.r)){
+                this.pos.add(velocity);
+            }else if(inScreen(this.pos.x + velocity.x, this.pos.y, this.r)&& !hittingObstacles (this.pos.x + velocity.x, this.pos.y, this.r)){
+                velocity.y = 0;this.pos.add(velocity);
+            }else if(inScreen(this.pos.x, this.pos.y + velocity.y, this.r)&& !hittingObstacles (this.pos.x, this.pos.y + velocity.y, this.r)){
+                velocity.x = 0;this.pos.add(velocity);
+            }
         };
         this.Stats = new Stats(StartingGun);
         this.hit = function (object) {
@@ -658,7 +665,7 @@ class Enemy {
                     // Very basic algorithm that rotates enemies back and forth if they would hit another enemy.
                     let degrees = 0;
                     while (degrees < 360) {
-                        if (hitsAnyEnemy(this.pos.x + Direction.x, this.pos.y + Direction.y, this.r, this.pos) || !inScreen(this.pos.x + Direction.x, this.pos.y + Direction.y, this.r)) {
+                        if (hitsAnyEnemy(this.pos.x + Direction.x, this.pos.y + Direction.y, this.r, this.pos) || !inScreen(this.pos.x + Direction.x, this.pos.y + Direction.y, this.r)|| hittingObstacles (this.pos.x + Direction.x, this.pos.y + Direction.y, this.r)) {
                             degrees *= -1;
                             if (degrees >= 0) {
                                 if (degrees > 15) {
@@ -766,4 +773,21 @@ function inScreen(x, y, r) {
         return false;
     }
     return true;
+}
+
+
+function RectCircleColliding(circle,rect){  
+    var distX = Math.abs(circle.pos.x - rect.pos.x-rect.w/2);
+    var distY = Math.abs(circle.pos.y - rect.pos.y-rect.h/2);
+
+    if (distX > (rect.w/2 + circle.r)) { return false; }
+    if (distY > (rect.h/2 + circle.r)) { return false; }
+
+    if (distX <= (rect.w/2)) { return true; } 
+    if (distY <= (rect.h/2)) { return true; }
+
+    var dx=distX-rect.w/2;
+    var dy=distY-rect.h/2;
+    
+    return (dx*dx+dy*dy<=(circle.r*circle.r));
 }

@@ -389,7 +389,15 @@ function Roomstart(floor,seed,dir){
     }
 }
 function enemRand(){
-    return createVector(random(480,1440),random(275,825))
+    let POSITION = createVector(random(width * 0.25,width * 0.75),random(height*0.25,height*0.75));
+    while(true){
+        if(hittingObstacles(POSITION.x,POSITION.y,50)){POSITION = createVector(random(width * 0.25,width * 0.75),random(height*0.25,height*0.75));
+        }else if(hitsAnyEnemy(POSITION.x,POSITION.y,50,enemies.length+1)){POSITION = createVector(random(width * 0.25,width * 0.75),random(height*0.25,height*0.75));}else{
+            break;
+        }
+        
+    }
+    return POSITION
     
     
 }

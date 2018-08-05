@@ -92,7 +92,8 @@ let PASSIVEITEMS = [
     bottledRage = new PassiveItem(false, 1, 0, 0, "Bottled Rage", "My pain is your pain", 0, 1),
     lotsOfBullets = new PassiveItem(false, 1, 0, 0, "Lots of Bullets", "More Bullets, More Damage", 0, 2),
     emergencyAmmo = new PassiveItem(false, 2, 0, 0, "Emergency Ammo", "Reloads two empty guns", 0, 3),
-    livingBullets = new PassiveItem(false, 0, 0, 0, "Living Bullets", "Watch them grow", 0, 4)
+    livingBullets = new PassiveItem(false, 0, 0, 0, "Living Bullets", "Watch them grow", 0, 4),
+    
 ];
 
 function passiveCheck() {
