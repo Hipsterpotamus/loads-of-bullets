@@ -243,24 +243,32 @@ function draw() {
 
 
 
-        rect(695 * P, 330 * heightP, 50 * P, 100 * heightP);
-        ellipse(720 * P, 330 * heightP, 50 * P, 100 * heightP);
+        rect(695 * P, 325 * heightP, 50 * P, 100 * heightP);
+        ellipse(720 * P, 325 * heightP, 50 * P, 100 * heightP);
+
         rect(755 * P, 335 * heightP, 50 * P, 100 * heightP);
         ellipse(780 * P, 335 * heightP, 50 * P, 100 * heightP);
-        rect(815 * P, 340 * heightP, 50 * P, 100 * heightP);
-        ellipse(840 * P, 340 * heightP, 50 * P, 100 * heightP);
-        rect(875 * P, 345 * heightP, 50 * P, 100 * heightP);
-        ellipse(900 * P, 345 * heightP, 50 * P, 100 * heightP);
+
+        rect(815 * P, 342 * heightP, 50 * P, 100 * heightP);
+        ellipse(840 * P, 342 * heightP, 50 * P, 100 * heightP);
+
+        rect(875 * P, 346 * heightP, 50 * P, 100 * heightP);
+        ellipse(900 * P, 346 * heightP, 50 * P, 100 * heightP);
+
         rect(935 * P, 350 * heightP, 50 * P, 100 * heightP);
         ellipse(960 * P, 350 * heightP, 50 * P, 100 * heightP);
-        rect(995 * P, 345 * heightP, 50 * P, 100 * heightP);
-        ellipse(1020 * P, 345 * heightP, 50 * P, 100 * heightP);
-        rect(1055 * P, 340 * heightP, 50 * P, 100 * heightP);
-        ellipse(1080 * P, 340 * heightP, 50 * P, 100 * heightP);
+
+        rect(995 * P, 346 * heightP, 50 * P, 100 * heightP);
+        ellipse(1020 * P, 346 * heightP, 50 * P, 100 * heightP);
+
+        rect(1055 * P, 342 * heightP, 50 * P, 100 * heightP);
+        ellipse(1080 * P, 342 * heightP, 50 * P, 100 * heightP);
+
         rect(1115 * P, 335 * heightP, 50 * P, 100 * heightP);
         ellipse(1140 * P, 335 * heightP, 50 * P, 100 * heightP);
-        rect(1175 * P, 330 * heightP, 50 * P, 100 * heightP);
-        ellipse(1200 * P, 330 * heightP, 50 * P, 100 * heightP);
+
+        rect(1175 * P, 325 * heightP, 50 * P, 100 * heightP);
+        ellipse(1200 * P, 325 * heightP, 50 * P, 100 * heightP);
 
         textSize(35 * P)
         if (menuGun == "Pistol" || menuGun == 1) {
