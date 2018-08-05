@@ -43,6 +43,8 @@ function gainItem() {
             }
         }
         player.passives[RS].pickedUp = true;
+
+        player.Stats.newestItem = player.passives[RS];
     }else{
         
         while (player.Stats.Items[RS].pickedUp) {
@@ -67,11 +69,11 @@ function gainItem() {
         player.Stats.size = Math.floor(player.Stats.size * player.Stats.Items[RS].size * 100) / 100;
         player.Stats.maxAmmo = Math.floor(player.Stats.maxAmmo * player.Stats.Items[RS].ammo * 100) / 100;
 
-
+        player.Stats.newestItem = player.Stats.Items[RS];
 
         
     }
-    player.Stats.newestItem = player.Stats.Items[RS];
+    
     player.Stats.itemReceiveTime = interval;
 }
 
