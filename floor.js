@@ -31,7 +31,7 @@ class Floor {
                             RSEED = Math.floor(random(16, 20));
                             break;
                         case 5:
-                            RSEED = Math.floor(random(1, 3)) + "B";
+                            RSEED = Math.floor(random(1, 4)) + "B";
                             break;
                     }
 
