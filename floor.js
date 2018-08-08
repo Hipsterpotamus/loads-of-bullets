@@ -16,19 +16,19 @@ class Floor {
                 for (let yr = 0; yr < this.floorH; yr++) {
                     switch (xr + yr) {
                         case 0:
-                            RSEED = Math.floor(random(1, 5));
+                            RSEED = Math.floor(random(1, 6));
                             break;
                         case 1:
-                            RSEED = Math.floor(random(1, 5));
+                            RSEED = Math.floor(random(1, 6));
                             break;
                         case 2:
-                            RSEED = Math.floor(random(6, 10));
+                            RSEED = Math.floor(random(6, 11));
                             break;
                         case 3:
-                            RSEED = Math.floor(random(11, 15));
+                            RSEED = Math.floor(random(11, 16));
                             break;
                         case 4:
-                            RSEED = Math.floor(random(16, 20));
+                            RSEED = Math.floor(random(16, 21));
                             break;
                         case 5:
                             RSEED = Math.floor(random(1, 4)) + "B";
@@ -98,6 +98,7 @@ class Floor {
 
         }
         this.showMiniMap = function () {
+        
             for (let xr = 0; xr < 4; xr++) {
                 for (let yr = 0; yr < 3; yr++) {
                     rectMode(CORNER);
@@ -232,9 +233,9 @@ class Exit {
                 this.leadsToY += 1;
                 break;
             case "nf": //Next Floor
-                this.pos = createVector(910, (height - 20) / P); //TL corner
-                this.width = 100;
-                this.height = 20;
+                this.pos = createVector((width - 170) / P, (height/2)/P); //TL corner
+                this.width = 20;
+                this.height = 100;
                 this.leadsToX = 0;
                 this.leadsToY = 0;
                 break;
@@ -253,35 +254,39 @@ class Exit {
         }
         this.playerHit = function () {
             if (player.pos.x + player.r > this.pos.x && player.pos.x - player.r < this.pos.x + this.width && player.pos.y + player.r > this.pos.y && player.pos.y - player.r < this.pos.y + this.height && this.active && !this.locked) {
-                floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = false;
-                floor.playerInside.x = this.leadsToX;
-                floor.playerInside.y = this.leadsToY;
-                floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = true;
-                switch (direction) {
-                    case "r":
-                        player.pos = createVector(player.r + this.width, 550);
-                        break;
-                    case "l":
-                        player.pos = createVector(1920 - (player.r + this.width), 550);
-                        break;
-                    case "u":
-                        player.pos = createVector(960, 1100 - (this.height + player.r));
-                        break;
-                    case "d":
-                        player.pos = createVector(960, player.r + this.height);
-                        break;
-                    case "nf":
-                        newFloor();
-                        break;
-                }
+                if(direction!="nf"||(floorTime>=21600&&floorTime<=21780)){
+                    
+                    floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = false;
+                    floor.playerInside.x = this.leadsToX;
+                    floor.playerInside.y = this.leadsToY;
+                    floor.rooms[floor.playerInside.x][floor.playerInside.y].playerInside = true;
+                    switch (direction) {
+                        case "r":
+                            player.pos = createVector(player.r + this.width, 550);
+                            break;
+                        case "l":
+                            player.pos = createVector(1920 - (player.r + this.width), 550);
+                            break;
+                        case "u":
+                            player.pos = createVector(960, 1100 - (this.height + player.r));
+                            break;
+                        case "d":
+                            player.pos = createVector(960, player.r + this.height);
+                            break;
+                        case "nf":
+                            newFloor();
+                            break;
+                    }
 
-                enemies = [];
-                lowobstacles = [];
-                highobstacles = [];
-                putUpObs(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed);
-                if (!floor.rooms[floor.playerInside.x][floor.playerInside.y].completed) {
-                    Roomstart(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed, direction);
+                    enemies = [];
+                    lowobstacles = [];
+                    highobstacles = [];
+                    putUpObs(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed);
+                    if (!floor.rooms[floor.playerInside.x][floor.playerInside.y].completed) {
+                        Roomstart(floor.level, floor.rooms[floor.playerInside.x][floor.playerInside.y].seed, direction);
+                    }
                 }
+                
 
             }
         }
@@ -303,6 +308,7 @@ function revealExits() {
 }
 function newFloor(){
     floor = new Floor(floor.level+1, 0);
+    floorTime = 0;
     floor.createRooms();
     player.pos = createVector(1920 / 2, 100);
 }

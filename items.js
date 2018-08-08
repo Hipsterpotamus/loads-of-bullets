@@ -31,9 +31,9 @@ class PassiveItem {
 
 function gainItem() {
     let Count = 1;
-    let RS = ((floor.seed * Count) % player.Stats.Items.length);
+    let RS = ((floor.seed * Count * player.Stats.CurrentWeapon.maxAmmo) % player.Stats.Items.length);
     if(floor.rooms[floor.playerInside.x][floor.playerInside.y].seed%2==0){
-        RS = ((floor.seed * Count) % player.passives.length);
+        RS = ((floor.seed * Count * player.Stats.CurrentWeapon.maxAmmo) % player.passives.length);
         while (player.passives[RS].pickedUp) {
             Count++;
             RS = ((floor.seed * Count) % player.passives.length);
@@ -49,7 +49,7 @@ function gainItem() {
         
         while (player.Stats.Items[RS].pickedUp) {
             Count++;
-            RS = ((floor.seed * Count) % player.Stats.Items.length);
+            RS = ((floor.seed * Count * player.Stats.CurrentWeapon.maxAmmo) % player.Stats.Items.length);
 
             if (Count > 25) {
                 RS = Math.floor(random(0, player.Stats.Items.length))

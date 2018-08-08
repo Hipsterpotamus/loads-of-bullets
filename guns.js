@@ -73,7 +73,7 @@ MachineGun = function () {
     return new Gun("Machine Gun", 6, 0.25, 1.25, 1, 0.75, "yellow", 700, 0, 0);
 }
 Shotgun = function () {
-    return new Gun("Shotgun", 0.5, 0.66, 1, 0.75, 0.66, "yellow", 125, 0, 0);
+    return new Gun("Shotgun", 0.5, 0.75, 1, 0.75, 0.66, "yellow", 125, 0, 0);
 }
 SniperRifle = function () {
     return new Gun("Sniper Rifle", 0.33, 8, 3, 3, 0.75, "yellow", 45, true, 0);
@@ -97,7 +97,7 @@ let OneGuns = [
 
     new Gun("Precision Sniper", 0.33, 14, 3, 3, 0.75, "yellow", 30, true, 0),
 
-    new Gun("Rapid Fire RPG", 0.5, 8, 4, 3, 2.5, "yellow", 100, 0, new exploOBJ(60, 2)),
+    new Gun("Rapid Fire RPG", 0.5, 6, 4, 3, 2.5, "yellow", 100, 0, new exploOBJ(60, 2)),
 
     new Gun("Seedling Shooter", 3, 0.75, 1.25, 1, 0.75, "brown", 200, true, false),
 

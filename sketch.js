@@ -6,7 +6,9 @@ let Ebullets = [];
 let BBBB;
 let enemies = [];
 let interval = 0,
-    rinterval = 0;
+    rinterval = 0,
+    floorTime = 0,
+    timeSpeed = 1;
 let explosions = [];
 let lowobstacles = [];
 let highobstacles = [];
@@ -22,7 +24,7 @@ function setup() {
 
     frameRate(60);
     background(0);
-
+    textFont("Futura");
 }
 
 
@@ -31,16 +33,35 @@ function draw() {
     if (menu == "Game") {
         interval++;
         rinterval++;
+        floorTime+=timeSpeed;
         if (interval % 5 == 0) {
             passiveCheck();
         }
         background(0);
+        
+        if(floor.playerInside.x==0&&floor.playerInside.y==0){ // Train Tracks
+            fillSet("white");
+            noStroke();
+            rect(0,50*P,1920*P,12.5*P);
+            rect(0,150*P,1920*P,12.5*P);
+            for(let tt = 0; tt< 19; tt++){
+                rect((40 + tt*100),50*P,10*P,100*P);
+            }
+        }else if(floor.playerInside.x==floor.floorL-1&&floor.playerInside.y==floor.floorH-1){
+            fillSet("white");
+            noStroke();
+            rect((width-50)*P,0,12.5*P,1100*P);
+            rect((width-150)*P,0,12.5*P,1100*P);
+            for(let ttb = 0; ttb< 11; ttb++){
+                rect((width-150)*P,(40 + ttb*100)*P,100*P,10*P);
+            }
+        }
         player.move();
         player.show();
 
 
 
-
+        
 
 
         if (player.Stats.CurrentWeapon.ammoReload >= 60 && mouseIsPressed) {
@@ -133,6 +154,11 @@ function draw() {
             if (floor.rooms[floor.playerInside.x][floor.playerInside.y].type == "boss") {
                 gainGun(floor.level);
             }
+            if(floor.rooms[floor.playerInside.x][floor.playerInside.y].type!="boss"&&floor.rooms[floor.playerInside.x][floor.playerInside.y].type!="item"){
+                if((floor.seed+floor.rooms[floor.playerInside.x][floor.playerInside.y].seed+floor.playerInside.x)%6==0){gainItem()}else{
+                    if((floor.seed+floor.rooms[floor.playerInside.x][floor.playerInside.y].seed+floor.playerInside.y)%2==0){player.HP += 2;if(player.HP > player.MAXHP){player.HP = player.MAXHP};player.Stats.newestItem = {"name":"Health Up","desc":"Free HP for you"};player.Stats.itemReceiveTime=150+interval;}
+                }
+            }
             floor.rooms[floor.playerInside.x][floor.playerInside.y].type = "n";
             for (let xc = floor.keys.length - 1; xc >= 0; xc--) {
                 if (floor.keys[xc].x == floor.playerInside.x && floor.keys[xc].y == floor.playerInside.y) {
@@ -142,6 +168,7 @@ function draw() {
             if (floor.keys.length == 0) {
                 unlockAll();
             }
+            
             revealExits();
 
         }
@@ -204,6 +231,12 @@ function draw() {
         } else {
             rect(50 * P, 965 * heightP, 150 * P, 2 * P);
         }
+        if(Math.floor(floorTime%3600/60)<10){
+            text(Math.floor(floorTime/3600)+":0"+Math.floor(floorTime%3600/60), 50 * P, 1080 * heightP);
+        }else{
+            text(Math.floor(floorTime/3600)+":"+Math.floor(floorTime%3600/60), 50 * P, 1080 * heightP);
+        }
+        
 
 
 
@@ -239,6 +272,8 @@ function draw() {
         textAlign(CENTER);
         textSize(100 * P);
         text("Loads of Bullets", 960 * P, 200 * heightP);
+        textSize(60 * P);
+        text("[SPACE] Help", 960 * P, 1050 * heightP);
 
 
 
@@ -310,6 +345,54 @@ function draw() {
         textSize(60 * P);
         fillSet("yellow");
         text("[Enter] START", 1400 * P, 850 * heightP);
+    }else if(menu == "Tutorial"){
+        background(0);
+        noStroke();
+        fillSet("yellow");
+        textAlign(LEFT);
+        textSize(60 * P);
+        text("Click to Shoot", 150 * P, 60 * heightP);
+        text("Move with WASD or Arrow keys", 325 * P, 140 * heightP);
+        text("Collect the Keys", 500 * P, 220 * heightP);
+        text("Beat the Boss", 675 * P, 300 * heightP);
+        text("Catch the train at 6:00", 825 * P, 380 * heightP);
+        text("Maybe grab an Item", 1000 * P, 460 * heightP);
+        text("Replace your guns", 1200 * P, 540 * heightP);
+        textSize(35*P)
+        text("Extra time? Explore rooms for", 50*P, 640 * heightP);
+        text("a change for items and health", 50*P, 680 * heightP);
+        rectMode(CORNER);
+        noStroke();
+
+        //Bottom left corner which displays ammo, reload bar, and guns
+        textAlign(LEFT);
+        fillSet("yellow");
+        rect(50 * P, 1000 * heightP, 25 * P, 50 * heightP);
+        ellipse(62.5 * P, 1000 * heightP, 25 * P, 50 * heightP);
+        textSize(50 * heightP);
+        text("150" + "/" + "150", 80 * P, 1012.5 * heightP)
+        textSize(35 * heightP);
+        text("Pistol", 80 * P, 1050 * heightP);
+        textSize(25 * heightP);
+        text("Toy Gun 1000 [SHIFT]", 120 * P, 1075 * heightP);
+        rect(50 * P, 965 * heightP, 150 * P, 2 * P);
+        text("0:00", 50 * P, 1080 * heightP);
+        
+
+
+        rect(550 * P, 1000 * heightP, 25 * P, 50 * heightP);
+        ellipse(562.5 * P, 1000 * heightP, 25 * P, 50 * heightP);
+        textSize(50 * heightP);
+        text("Ammo/Max Ammo", 580 * P, 1012.5 * heightP)
+        textSize(35 * heightP);
+        text("Gun", 580 * P, 1050 * heightP);
+        textSize(25 * heightP);
+        text("2nd Gun Ammo [SHIFT]", 620 * P, 1075 * heightP);
+        rect(550 * P, 965 * heightP, 150 * P, 2 * P);
+        text("Time", 550 * P, 1080 * heightP);
+        
+        textSize(80 * heightP);
+        text("[SPACE] Exit", 1300 * P, 1050 * heightP);
     }
     // removed Crosshair, if reimplemented, put cursor:none in the index.html file
     // noFill();
@@ -352,6 +435,7 @@ function startGame() {
 }
 $(window).keydown(function (event) {
     switch (event.which) {
+        
         case 65: //A key (left)
             player.vel.x = -1;
             break;
@@ -378,22 +462,33 @@ $(window).keydown(function (event) {
             }
 
             break;
-        case 49:
+        case 32: //Space key (warps time)
+            
+            if(menu=="Game"){
+                timeSpeed = 30;
+            }else if(menu=="Home"){
+                menu = "Tutorial";
+            }else if(menu=="Tutorial"){
+                menu = "Home";
+            }
+            
+            break;
+        case 49: //Pistol
             menuGun = 1;
             break;
-        case 50:
+        case 50: //Machine Gun
             menuGun = 2;
             break;
-        case 51:
+        case 51: //Shotgun
             menuGun = 3;
             break;
-        case 52:
+        case 52: //Sniper Rifle
             menuGun = 4;
             break;
-        case 53:
+        case 53: //Assault Rifle
             menuGun = 5;
             break;
-        case 54:
+        case 54: //Bazooka
             menuGun = 6;
             break;
         case 13:
@@ -428,6 +523,9 @@ $(window).keyup(function (event) {
             }
 
 
+            break;
+        case 32:
+            timeSpeed = 1;
             break;
     }
 });
